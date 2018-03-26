@@ -1,0 +1,123 @@
+[debug] :: resolving dependencies :: default#provaanna$sources;0.1
+[debug] 	confs: [compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool]
+[debug] 	validate = true
+[debug] 	refresh = false
+[debug] resolving dependencies for configuration 'compile'
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [compile]
+[debug] resolving dependencies for configuration 'runtime'
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [runtime]
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [compile]
+[debug] resolving dependencies for configuration 'test'
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [test]
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [runtime]
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->default]
+[debug] sbt-chain: Checking cache for: dependency: org.scalatest#scalatest_2.12;3.0.5 {test=[default, compile, runtime, default(compile), master], test-internal=[default, compile, runtime, default(compile), master]}
+[debug] sbt-chain: module revision found in cache: org.scalatest#scalatest_2.12;3.0.5
+[debug] 	found org.scalatest#scalatest_2.12;3.0.5 in sbt-chain
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->runtime]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->master]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->runtime]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->default(compile)]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->runtime]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->master]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->master]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test->compile]
+[debug] sbt-chain: Checking cache for: dependency: org.scalactic#scalactic_2.12;3.0.5 {test=[compile, runtime(*), master(compile), runtime, compile(*), master], test-internal=[compile, runtime(*), master(compile), runtime, compile(*), master]}
+[debug] sbt-chain: module revision found in cache: org.scalactic#scalactic_2.12;3.0.5
+[debug] 	found org.scalactic#scalactic_2.12;3.0.5 in sbt-chain
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test->runtime(*)]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test->master(compile)]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test->runtime]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test->compile(*)]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test->master]
+[debug] resolving dependencies for configuration 'provided'
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [provided]
+[debug] resolving dependencies for configuration 'optional'
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [optional]
+[debug] resolving dependencies for configuration 'compile-internal'
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [compile-internal]
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [compile]
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [optional]
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [provided]
+[debug] resolving dependencies for configuration 'runtime-internal'
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [runtime-internal]
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [runtime]
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [compile]
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [optional]
+[debug] resolving dependencies for configuration 'test-internal'
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [test-internal]
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [test]
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [runtime]
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->default]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->runtime]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->master]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->runtime]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->default(compile)]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->runtime]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->master]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->master]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test->runtime(*)]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test->master(compile)]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test->runtime]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test->compile(*)]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test->master]
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [optional]
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [provided]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test-internal->default]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test-internal->runtime]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test-internal->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test-internal->master]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test-internal->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test-internal->runtime]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test-internal->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test-internal->default(compile)]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test-internal->runtime]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test-internal->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test-internal->master]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalatest#scalatest_2.12;3.0.5 [test-internal->master]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test-internal->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test-internal->runtime(*)]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test-internal->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test-internal->master(compile)]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test-internal->runtime]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test-internal->compile]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test-internal->compile(*)]
+[debug] == resolving dependencies default#provaanna$sources;0.1->org.scalactic#scalactic_2.12;3.0.5 [test-internal->master]
+[debug] resolving dependencies for configuration 'plugin'
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [plugin]
+[debug] resolving dependencies for configuration 'pom'
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [pom]
+[debug] resolving dependencies for configuration 'scala-tool'
+[debug] == resolving dependencies for default#provaanna$sources;0.1 [scala-tool]
+[debug] 	resolved ivy file produced in cache
+[debug] :: downloading artifacts ::
+[debug] 	[NOT REQUIRED] org.scalatest#scalatest_2.12;3.0.5!scalatest_2.12.jar(src)
+[debug] 	[NOT REQUIRED] org.scalactic#scalactic_2.12;3.0.5!scalactic_2.12.jar(src)
+[debug] :: resolution report :: resolve 31ms :: artifacts dl 7ms
+[debug] 	report for default#provaanna$sources;0.1 compile produced in /Users/abernasconi/Documents/gitProjects/provaanna/target/scala-2.12/resolution-cache/reports/default-provaanna$sources-compile.xml
+[debug] 	report for default#provaanna$sources;0.1 runtime produced in /Users/abernasconi/Documents/gitProjects/provaanna/target/scala-2.12/resolution-cache/reports/default-provaanna$sources-runtime.xml
+[debug] 	report for default#provaanna$sources;0.1 test produced in /Users/abernasconi/Documents/gitProjects/provaanna/target/scala-2.12/resolution-cache/reports/default-provaanna$sources-test.xml
+[debug] 	report for default#provaanna$sources;0.1 provided produced in /Users/abernasconi/Documents/gitProjects/provaanna/target/scala-2.12/resolution-cache/reports/default-provaanna$sources-provided.xml
+[debug] 	report for default#provaanna$sources;0.1 optional produced in /Users/abernasconi/Documents/gitProjects/provaanna/target/scala-2.12/resolution-cache/reports/default-provaanna$sources-optional.xml
+[debug] 	report for default#provaanna$sources;0.1 compile-internal produced in /Users/abernasconi/Documents/gitProjects/provaanna/target/scala-2.12/resolution-cache/reports/default-provaanna$sources-compile-internal.xml
+[debug] 	report for default#provaanna$sources;0.1 runtime-internal produced in /Users/abernasconi/Documents/gitProjects/provaanna/target/scala-2.12/resolution-cache/reports/default-provaanna$sources-runtime-internal.xml
+[debug] 	report for default#provaanna$sources;0.1 test-internal produced in /Users/abernasconi/Documents/gitProjects/provaanna/target/scala-2.12/resolution-cache/reports/default-provaanna$sources-test-internal.xml
+[debug] 	report for default#provaanna$sources;0.1 plugin produced in /Users/abernasconi/Documents/gitProjects/provaanna/target/scala-2.12/resolution-cache/reports/default-provaanna$sources-plugin.xml
+[debug] 	report for default#provaanna$sources;0.1 pom produced in /Users/abernasconi/Documents/gitProjects/provaanna/target/scala-2.12/resolution-cache/reports/default-provaanna$sources-pom.xml
+[debug] 	report for default#provaanna$sources;0.1 scala-tool produced in /Users/abernasconi/Documents/gitProjects/provaanna/target/scala-2.12/resolution-cache/reports/default-provaanna$sources-scala-tool.xml
+[debug] 	resolve done (31ms resolve - 7ms download)
