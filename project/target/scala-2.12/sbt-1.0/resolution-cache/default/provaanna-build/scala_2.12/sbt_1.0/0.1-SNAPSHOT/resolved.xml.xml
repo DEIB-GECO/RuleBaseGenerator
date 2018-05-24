@@ -4,7 +4,7 @@
 		module="provaanna-build"
 		revision="0.1-SNAPSHOT"
 		status="integration"
-		publication="20180326154312"
+		publication="20180524141335"
 		e:sbtVersion="1.0" e:scalaVersion="2.12"
 	>
 		<description>
