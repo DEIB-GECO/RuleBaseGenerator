@@ -4,7 +4,7 @@
 		module="provaanna$sources"
 		revision="0.1"
 		status="integration"
-		publication="20180323144010"
+		publication="20180524141343"
 	/>
 	<configurations>
 		<conf name="compile" visibility="public" description=""/>
@@ -28,6 +28,10 @@
 		</dependency>
 		<dependency org="org.scalactic" name="scalactic_2.12" rev="3.0.5" transitive="false" conf="test->compile,runtime(*),master(compile),runtime,compile(*),master;test-internal->compile,runtime(*),master(compile),runtime,compile(*),master">
 			<artifact name="scalactic_2.12" type="src" ext="jar" conf="*" e:classifier="sources"/>
+			<include name="*" type="*" ext="*" conf="" matcher="exact"/>
+		</dependency>
+		<dependency org="dk.brics.automaton" name="automaton" rev="1.11-8" transitive="false" conf="compile->default,compile,runtime,default(compile),master;runtime->default,compile,runtime,default(compile),master;test->default,compile,runtime,default(compile),master;compile-internal->default,compile,runtime,default(compile),master;runtime-internal->default,compile,runtime,default(compile),master;test-internal->default,compile,runtime,default(compile),master">
+			<artifact name="automaton" type="src" ext="jar" conf="*" e:classifier="sources"/>
 			<include name="*" type="*" ext="*" conf="" matcher="exact"/>
 		</dependency>
 	</dependencies>

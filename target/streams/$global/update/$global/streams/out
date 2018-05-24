@@ -15,6 +15,27 @@
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->default(compile)]
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] sbt-chain: Checking cache for: dependency: dk.brics.automaton#automaton;1.11-8 {compile=[default(compile)]}
+[debug] sbt-chain-delegate: Checking cache for: dependency: dk.brics.automaton#automaton;1.11-8 {compile=[default(compile)]}
+[debug] 		tried /Users/abernasconi/.ivy2/local/dk.brics.automaton/automaton/1.11-8/ivys/ivy.xml
+[debug] 	local: no ivy file found for dk.brics.automaton#automaton;1.11-8
+[debug] 		tried https://repo1.maven.org/maven2/dk/brics/automaton/automaton/1.11-8/automaton-1.11-8.pom
+[debug] 	public: found md file for dk.brics.automaton#automaton;1.11-8
+[debug] 		=> https://repo1.maven.org/maven2/dk/brics/automaton/automaton/1.11-8/automaton-1.11-8.pom (1.11-8)
+[debug] downloading https://repo1.maven.org/maven2/dk/brics/automaton/automaton/1.11-8/automaton-1.11-8.pom ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/dk/brics/automaton/automaton/1.11-8/automaton-1.11-8.pom
+[debug] 	public: downloading https://repo1.maven.org/maven2/dk/brics/automaton/automaton/1.11-8/automaton-1.11-8.pom.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/dk/brics/automaton/automaton/1.11-8/automaton-1.11-8.pom
+[debug] 	[SUCCESSFUL ] dk.brics.automaton#automaton;1.11-8!automaton.pom(pom.original) (77ms)
+[debug] 		tried /Users/abernasconi/.ivy2/local/dk.brics.automaton/automaton/1.11-8/jars/automaton.jar
+[debug] 		tried https://repo1.maven.org/maven2/dk/brics/automaton/automaton/1.11-8/automaton-1.11-8.jar
+[debug] 	found dk.brics.automaton#automaton;1.11-8 in public
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->runtime]
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->compile]
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->master]
 [debug] resolving dependencies for configuration 'runtime'
 [debug] == resolving dependencies for default#provaanna_2.12;0.1 [runtime]
 [debug] == resolving dependencies for default#provaanna_2.12;0.1 [compile]
@@ -26,6 +47,14 @@
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->default(compile)]
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->runtime]
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->compile]
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->master]
 [debug] resolving dependencies for configuration 'test'
 [debug] == resolving dependencies for default#provaanna_2.12;0.1 [test]
 [debug] == resolving dependencies for default#provaanna_2.12;0.1 [runtime]
@@ -40,6 +69,16 @@
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->default(compile)]
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->runtime]
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->compile]
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->master]
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->default(compile)]
 [debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
 [debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
@@ -48,20 +87,8 @@
 [debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
 [debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
 [debug] sbt-chain: Checking cache for: dependency: org.scalatest#scalatest_2.12;3.0.5 {test=[default(compile)]}
-[debug] sbt-chain-delegate: Checking cache for: dependency: org.scalatest#scalatest_2.12;3.0.5 {test=[default(compile)]}
-[debug] 		tried /Users/abernasconi/.ivy2/local/org.scalatest/scalatest_2.12/3.0.5/ivys/ivy.xml
-[debug] 	local: no ivy file found for org.scalatest#scalatest_2.12;3.0.5
-[debug] 		tried https://repo1.maven.org/maven2/org/scalatest/scalatest_2.12/3.0.5/scalatest_2.12-3.0.5.pom
-[debug] 	public: found md file for org.scalatest#scalatest_2.12;3.0.5
-[debug] 		=> https://repo1.maven.org/maven2/org/scalatest/scalatest_2.12/3.0.5/scalatest_2.12-3.0.5.pom (3.0.5)
-[debug] downloading https://repo1.maven.org/maven2/org/scalatest/scalatest_2.12/3.0.5/scalatest_2.12-3.0.5.pom ...
-[debug] 	public: downloading https://repo1.maven.org/maven2/org/scalatest/scalatest_2.12/3.0.5/scalatest_2.12-3.0.5.pom
-[debug] 	public: downloading https://repo1.maven.org/maven2/org/scalatest/scalatest_2.12/3.0.5/scalatest_2.12-3.0.5.pom.sha1
-[debug] sha1 OK for https://repo1.maven.org/maven2/org/scalatest/scalatest_2.12/3.0.5/scalatest_2.12-3.0.5.pom
-[debug] 	[SUCCESSFUL ] org.scalatest#scalatest_2.12;3.0.5!scalatest_2.12.pom(pom.original) (72ms)
-[debug] 		tried /Users/abernasconi/.ivy2/local/org.scalatest/scalatest_2.12/3.0.5/bundles/scalatest_2.12.jar
-[debug] 		tried https://repo1.maven.org/maven2/org/scalatest/scalatest_2.12/3.0.5/scalatest_2.12-3.0.5.jar
-[debug] 	found org.scalatest#scalatest_2.12;3.0.5 in public
+[debug] sbt-chain: module revision found in cache: org.scalatest#scalatest_2.12;3.0.5
+[debug] 	found org.scalatest#scalatest_2.12;3.0.5 in sbt-chain
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->runtime]
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->compile]
 [debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {provided=[compile(*), provided(*), runtime(*), master(compile)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {provided=[compile(*), provided(*), runtime(*), master(compile)]}
@@ -109,20 +136,8 @@
 [debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
 [debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
 [debug] sbt-chain: Checking cache for: dependency: org.scalactic#scalactic_2.12;3.0.5 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
-[debug] sbt-chain-delegate: Checking cache for: dependency: org.scalactic#scalactic_2.12;3.0.5 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
-[debug] 		tried /Users/abernasconi/.ivy2/local/org.scalactic/scalactic_2.12/3.0.5/ivys/ivy.xml
-[debug] 	local: no ivy file found for org.scalactic#scalactic_2.12;3.0.5
-[debug] 		tried https://repo1.maven.org/maven2/org/scalactic/scalactic_2.12/3.0.5/scalactic_2.12-3.0.5.pom
-[debug] 	public: found md file for org.scalactic#scalactic_2.12;3.0.5
-[debug] 		=> https://repo1.maven.org/maven2/org/scalactic/scalactic_2.12/3.0.5/scalactic_2.12-3.0.5.pom (3.0.5)
-[debug] downloading https://repo1.maven.org/maven2/org/scalactic/scalactic_2.12/3.0.5/scalactic_2.12-3.0.5.pom ...
-[debug] 	public: downloading https://repo1.maven.org/maven2/org/scalactic/scalactic_2.12/3.0.5/scalactic_2.12-3.0.5.pom
-[debug] 	public: downloading https://repo1.maven.org/maven2/org/scalactic/scalactic_2.12/3.0.5/scalactic_2.12-3.0.5.pom.sha1
-[debug] sha1 OK for https://repo1.maven.org/maven2/org/scalactic/scalactic_2.12/3.0.5/scalactic_2.12-3.0.5.pom
-[debug] 	[SUCCESSFUL ] org.scalactic#scalactic_2.12;3.0.5!scalactic_2.12.pom(pom.original) (61ms)
-[debug] 		tried /Users/abernasconi/.ivy2/local/org.scalactic/scalactic_2.12/3.0.5/bundles/scalactic_2.12.jar
-[debug] 		tried https://repo1.maven.org/maven2/org/scalactic/scalactic_2.12/3.0.5/scalactic_2.12-3.0.5.jar
-[debug] 	found org.scalactic#scalactic_2.12;3.0.5 in public
+[debug] sbt-chain: module revision found in cache: org.scalactic#scalactic_2.12;3.0.5
+[debug] 	found org.scalactic#scalactic_2.12;3.0.5 in sbt-chain
 [debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {provided=[compile(*), provided(*), runtime(*), master(compile)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {provided=[compile(*), provided(*), runtime(*), master(compile)]}
 [debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-library;2.12.4 {compile=[compile(*), master(compile)], runtime=[runtime(*)]} => dependency: org.scala-lang#scala-library;2.12.4 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
 [debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-reflect;2.12.4 {compile=[compile(*), master(compile)], runtime=[runtime(*)]} => dependency: org.scala-lang#scala-reflect;2.12.4 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}
@@ -299,6 +314,18 @@
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->default(compile)]
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->runtime]
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->compile]
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->master]
 [debug] == resolving dependencies for default#provaanna_2.12;0.1 [optional]
 [debug] == resolving dependencies for default#provaanna_2.12;0.1 [provided]
 [debug] resolving dependencies for configuration 'runtime-internal'
@@ -317,6 +344,18 @@
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->default(compile)]
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->runtime]
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->compile]
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->master]
 [debug] == resolving dependencies for default#provaanna_2.12;0.1 [optional]
 [debug] resolving dependencies for configuration 'test-internal'
 [debug] == resolving dependencies for default#provaanna_2.12;0.1 [test-internal]
@@ -339,6 +378,22 @@
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scala-lang#scala-library;2.12.4 [compile->runtime]
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scala-lang#scala-library;2.12.4 [compile->compile]
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scala-lang#scala-library;2.12.4 [compile->master]
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->default(compile)]
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
+[debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->runtime]
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->compile]
+[debug] == resolving dependencies default#provaanna_2.12;0.1->dk.brics.automaton#automaton;1.11-8 [compile->master]
 [debug] == resolving dependencies default#provaanna_2.12;0.1->org.scalatest#scalatest_2.12;3.0.5 [test->default(compile)]
 [debug] dependency descriptor has been mediated: dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]} => dependency: org.scala-lang#scala-compiler;2.12.4 {scala-tool=[default, optional(default)]}
 [debug] dependency descriptor has been mediated: MergedDescriptors(dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)]},dependency: org.scala-lang#scala-library;2.12.4 {compile=[default(compile)]}) => dependency: org.scala-lang#scala-library;2.12.4 {scala-tool=[default, optional(default)], compile=[default(compile)]}
@@ -698,24 +753,20 @@
 [debug] ignoring unhandled DependencyDescriptorMediator: class sbt.internal.librarymanagement.IvyScalaUtil$OverrideScalaMediator
 [debug] 	resolved ivy file produced in cache
 [debug] :: downloading artifacts ::
-[debug] 	[NOT REQUIRED] org.scala-lang#scala-compiler;2.12.4!scala-compiler.jar
+[debug] 	[NOT REQUIRED] org.scalatest#scalatest_2.12;3.0.5!scalatest_2.12.jar(bundle)
 [debug] 	[NOT REQUIRED] org.scala-lang#scala-reflect;2.12.4!scala-reflect.jar
+[debug] 	[NOT REQUIRED] org.scalactic#scalactic_2.12;3.0.5!scalactic_2.12.jar(bundle)
+[debug] 		tried https://repo1.maven.org/maven2/dk/brics/automaton/automaton/1.11-8/automaton-1.11-8.jar
 [debug] 	[NOT REQUIRED] jline#jline;2.14.5!jline.jar
-[debug] 	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.12;1.0.6!scala-xml_2.12.jar(bundle)
 [debug] 	[NOT REQUIRED] org.scala-lang#scala-library;2.12.4!scala-library.jar
-[debug] 		tried https://repo1.maven.org/maven2/org/scalactic/scalactic_2.12/3.0.5/scalactic_2.12-3.0.5.jar
-[debug] 		tried https://repo1.maven.org/maven2/org/scalatest/scalatest_2.12/3.0.5/scalatest_2.12-3.0.5.jar
-[info] downloading https://repo1.maven.org/maven2/org/scalactic/scalactic_2.12/3.0.5/scalactic_2.12-3.0.5.jar ...
-[info] downloading https://repo1.maven.org/maven2/org/scalatest/scalatest_2.12/3.0.5/scalatest_2.12-3.0.5.jar ...
-[debug] 	public: downloading https://repo1.maven.org/maven2/org/scalactic/scalactic_2.12/3.0.5/scalactic_2.12-3.0.5.jar
-[debug] 	public: downloading https://repo1.maven.org/maven2/org/scalatest/scalatest_2.12/3.0.5/scalatest_2.12-3.0.5.jar
-[debug] 	public: downloading https://repo1.maven.org/maven2/org/scalactic/scalactic_2.12/3.0.5/scalactic_2.12-3.0.5.jar.sha1
-[debug] sha1 OK for https://repo1.maven.org/maven2/org/scalactic/scalactic_2.12/3.0.5/scalactic_2.12-3.0.5.jar
-[info] 	[SUCCESSFUL ] org.scalactic#scalactic_2.12;3.0.5!scalactic_2.12.jar(bundle) (1370ms)
-[debug] 	public: downloading https://repo1.maven.org/maven2/org/scalatest/scalatest_2.12/3.0.5/scalatest_2.12-3.0.5.jar.sha1
-[debug] sha1 OK for https://repo1.maven.org/maven2/org/scalatest/scalatest_2.12/3.0.5/scalatest_2.12-3.0.5.jar
-[info] 	[SUCCESSFUL ] org.scalatest#scalatest_2.12;3.0.5!scalatest_2.12.jar(bundle) (15539ms)
-[debug] :: resolution report :: resolve 951ms :: artifacts dl 15543ms
+[debug] 	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.12;1.0.6!scala-xml_2.12.jar(bundle)
+[info] downloading https://repo1.maven.org/maven2/dk/brics/automaton/automaton/1.11-8/automaton-1.11-8.jar ...
+[debug] 	public: downloading https://repo1.maven.org/maven2/dk/brics/automaton/automaton/1.11-8/automaton-1.11-8.jar
+[debug] 	[NOT REQUIRED] org.scala-lang#scala-compiler;2.12.4!scala-compiler.jar
+[debug] 	public: downloading https://repo1.maven.org/maven2/dk/brics/automaton/automaton/1.11-8/automaton-1.11-8.jar.sha1
+[debug] sha1 OK for https://repo1.maven.org/maven2/dk/brics/automaton/automaton/1.11-8/automaton-1.11-8.jar
+[info] 	[SUCCESSFUL ] dk.brics.automaton#automaton;1.11-8!automaton.jar (265ms)
+[debug] :: resolution report :: resolve 1901ms :: artifacts dl 269ms
 [debug] 	report for default#provaanna_2.12;0.1 compile produced in /Users/abernasconi/Documents/gitProjects/provaanna/target/scala-2.12/resolution-cache/reports/default-provaanna_2.12-compile.xml
 [debug] 	report for default#provaanna_2.12;0.1 runtime produced in /Users/abernasconi/Documents/gitProjects/provaanna/target/scala-2.12/resolution-cache/reports/default-provaanna_2.12-runtime.xml
 [debug] 	report for default#provaanna_2.12;0.1 test produced in /Users/abernasconi/Documents/gitProjects/provaanna/target/scala-2.12/resolution-cache/reports/default-provaanna_2.12-test.xml
@@ -727,5 +778,5 @@
 [debug] 	report for default#provaanna_2.12;0.1 plugin produced in /Users/abernasconi/Documents/gitProjects/provaanna/target/scala-2.12/resolution-cache/reports/default-provaanna_2.12-plugin.xml
 [debug] 	report for default#provaanna_2.12;0.1 pom produced in /Users/abernasconi/Documents/gitProjects/provaanna/target/scala-2.12/resolution-cache/reports/default-provaanna_2.12-pom.xml
 [debug] 	report for default#provaanna_2.12;0.1 scala-tool produced in /Users/abernasconi/Documents/gitProjects/provaanna/target/scala-2.12/resolution-cache/reports/default-provaanna_2.12-scala-tool.xml
-[debug] 	resolve done (951ms resolve - 15543ms download)
+[debug] 	resolve done (1901ms resolve - 269ms download)
 [info] Done updating.

@@ -1,15 +1,20 @@
-import KnowledgeBase.rulesList
+import java.io.{File, FileNotFoundException, IOException}
+
+import scala.collection.mutable.{LinkedHashSet, MutableList}
+import scala.io.Source
 import scala.util.matching.Regex
 
-case class Rule(antecedent: String, consequent: String, ordered_id: Int, rule_type: RuleType.Value) {
- // val numPattern = "[0-9]+".r
+case class Rule(antecedent: String, consequent: String, ordered_id: Int) {
+  // val numPattern = "[0-9]+".r
   val pattern = antecedent.r
 
   override def toString: String = {
-    (antecedent + " => " + consequent + "\t type: " + rule_type)
+    (ordered_id + "\t" + antecedent + "=>" + consequent)
   }
 
+
 }
+
 //companion object
 object Rule {
 
@@ -17,15 +22,22 @@ object Rule {
   //def apply(antecedent: String, consequent: String, order: Int, tp: RuleType.Value) = new Rule(antecedent, consequent, order, tp)
 
   //alternative costructor
-  def apply(pair: (String, String), order: Int, tp: RuleType.Value) = new Rule(pair._1, pair._2, order, tp)
+  def apply(pair: (String, String), order: Int) = new Rule(pair._1, pair._2, order)
+
+  def StringToRule(s: String): Rule = {
+    val rule_pattern = "([0-9]+)\\t(.*)=>(.*)"
+    new Rule(s.replaceFirst(rule_pattern, "$2"),
+      s.replaceFirst(rule_pattern, "$3"),
+      Integer.parseInt(s.replaceFirst(rule_pattern, "$1")))
+  }
 
 
-  def trigger(rule: Rule,new_key: String): Boolean = {
+  def trigger(rule: Rule, new_key: String): Boolean = {
     val answer: Boolean = rule.pattern.findFirstIn(new_key).isDefined
     answer
   }
 
-  def firstMatchedRule(key: String): Option[Rule] = KnowledgeBase.rulesList.find((r: Rule) => trigger(r,key))
+  def firstMatchedRule(key: String): Option[Rule] = KnowledgeBase.rulesList.find((r: Rule) => trigger(r, key))
 
 
   //def firstMatchedRule(key: String): Option[Rule] = rulesList.find((rule: Rule) => rule.trigger(key))
@@ -46,11 +58,16 @@ object Rule {
 
   def simulateRule(key: String, r: Rule): Option[String] = {
 
-    if (key.matches(r.pattern.toString)){  //if(key.matches(r.antecedent)) {
-      if (r.consequent.equals("DELETE"))
-        Some(key.replaceAll(r.antecedent, "NULL"))
-      else
-        Some(key.replaceAll(r.antecedent, r.consequent))
+    if (key.matches(r.antecedent)) {
+      try {
+        if (r.consequent.equals("DELETE"))
+          Some(key.replaceAll(r.antecedent, "NULL"))
+        else
+          Some(key.replaceAll(r.antecedent, r.consequent))
+      }
+      catch {
+        case e: Exception => println("Rule has wrong syntax! (e.g., it matches " + key + ", but cannot perform action)"); throw e
+      }
     }
     else
       None
@@ -68,10 +85,37 @@ object Rule {
       Some(key)
   }
 
+  def applyRules(dir: String): Unit = {
+    val input_files = Utils.getListOfFiles(new File(dir))
+    val output_file_lines = new LinkedHashSet[String]()
 
-  def checkRuleInsertionOrder(a: String, t: RuleType.Value): Int = {
+    try {
+      for (current_file <- input_files) {
+        val bufferedSource = Source.fromFile(current_file.getAbsolutePath)
+        for (line <- bufferedSource.getLines.toList) {
 
+          val (key, value): (String, String) = Utils.extractPair(line)
 
+          //TODO handle rules application in order of mutableList
+          //  output_file_lines += (Rule.applyRule(key).get,value)
+          output_file_lines += key.replaceAll("__[0-9]*__", "__X__")
+
+        }
+        bufferedSource.close
+      }
+    } catch {
+      case e: FileNotFoundException => println("Couldn't find that file.")
+      case e: IOException => println("Got an IOException!")
+    }
+
+  }
+
+  def checkRuleInsertionOrder(a: String, rulesList: MutableList[Rule]): Int = {
+
+    for (rule <- rulesList) {
+      if (a.matches(rule.antecedent))
+        rule.ordered_id - 1
+    }
     0
   }
 

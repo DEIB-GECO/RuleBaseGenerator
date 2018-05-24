@@ -1,143 +1,92 @@
 import java.io._
 
+import scala.util.control.Breaks._
+
 import Cleaner._
+import IOManager._
+import Rule._
 
 import scala.collection.mutable
-import scala.collection.mutable.{ArrayBuffer, LinkedHashSet, AbstractIterable}
+import scala.collection.mutable.{ArrayBuffer, LinkedHashSet, MutableList}
 import scala.io.Source
 import scala.io.StdIn._
 
 object KnowledgeBase {
 
- var rulesList = new LinkedHashSet[Rule]
- var unseen_keys = new LinkedHashSet[String]
- var seen_keys = new LinkedHashSet[String]
+
+  var unseen_keys = new LinkedHashSet[String]
+  var rulesList = new MutableList[Rule]
 
 
+  def createKB(readRulesList: MutableList[Rule], all_keys: LinkedHashSet[String], seen_keys: LinkedHashSet[String]): Unit = {
 
-  def createKB: Unit = {
+    unseen_keys = all_keys --= seen_keys
+    writeKeys(unseen_keys_file, unseen_keys)
 
-    //create rule base file
-    val rules_base_file: File = new File(output_directory_path + rules_file_name)
+    rulesList = readRulesList
 
-    unseen_keys = buildKeysBase(input_directory_path)
-
-    updateFile(keys_file_name,unseen_keys.map(_.asInstanceOf[Any]))
-    //print keys base file
-    /*val keys_base_file: File = new File(output_directory_path + keys_file_name) //not seen keys
-    var bw_keys = new BufferedWriter(new FileWriter(keys_base_file))
-    var bw_rules = new BufferedWriter(new FileWriter(rules_base_file))
-    for(s <- unseen_keys){
-      bw_keys.write(s + "\n")
-    }
-    bw_keys.close()*/
-
-    println("""Please open the "keys_base.txt" and "rules_base.txt" files and get inspiration for new cleaning rules!""")
-    print("\nPress R (rule) to insert rule, Q (quit) to quit input procedure: ")
-
-    while(getRuleOrQuitChoice.matches("[rR]")){
+    while (getRuleOrQuitChoice.matches("[rR]")) {
 
       //read user input rule TODO move to method
       val ExpectedPatternRule = "(.*)\\s*(=>)\\s*(.*)".r
-      val inputRule = readLine()
-      val ExpectedPatternRule(a, b, c) = inputRule
-      val rule_type = if (a.contains(".*")) RuleType.GLOBAL else RuleType.LOCAL
+      val ExpectedPatternRule(a, b, c) = readLine()
 
       //automatically decide rule order
-      val rule_order: Int = Rule.checkRuleInsertionOrder(a, rule_type)
+      val rule_order: Int = checkRuleInsertionOrder(a, rulesList)
 
       //create rule to be simulated
-      var simulated_rule = Rule(a, c, rule_order, rule_type)
+      val simulated_rule = Rule(a, c, rule_order)
 
-      val temp_new_keys = new ArrayBuffer[(String,String)]
+      val temp_new_keys = new ArrayBuffer[(String, String)]
 
       //simulation of application of rule (wrt its order)
-      for (key <- unseen_keys) {
 
-        val new_key: Option[String] = Rule.simulateRule(key, simulated_rule)
-        if (new_key.isDefined)
-          temp_new_keys += ((key, new_key.get))
-
-      }
-
-      //visualization of rule application simulation
-      if (temp_new_keys.nonEmpty){
-        println("Proposed rule applies to the following keys: ")
-        for (temp <- temp_new_keys) {
-          println("Key before: " + temp._1 + "\tKey after: " + temp._2)
+      try {
+        for (key <- unseen_keys) {
+          val new_key: Option[String] = simulateRule(key, simulated_rule)
+          if (new_key.isDefined)
+            temp_new_keys += ((key, new_key.get))
         }
-        print("\nPress y (yes) to accept rule, n (no) to reject it: ")
 
-        if (getRejectOrAcceptChoice.matches("[yY]")) {
-
-          //apply rule
-          rulesList += simulated_rule //update rules base
-          for (key <- temp_new_keys) {
-            unseen_keys.remove(key._1)
-            seen_keys += key._1 //I save the original seen key (not the changed one)
+        //visualization of rule application simulation
+        if (temp_new_keys.nonEmpty) {
+          println("Proposed rule applies to the following " + temp_new_keys.size + " keys: ")
+          for (temp <- temp_new_keys) {
+            println("Key before: " + temp._1 + "\tKey after: " + temp._2)
           }
+          print("\nPress y (yes) to accept rule, n (no) to reject it: ")
 
-          //visualize results of application
-          //bw_rules = new BufferedWriter(new FileWriter(rules_base_file))
-          //for(r <- rulesList)
-          //  bw_rules.write(r.toString + "\n")
-          //bw_rules.close()
+          if (getRejectOrAcceptChoice.matches("[yY]")) {
 
-          updateFile(rules_file_name,rulesList.map(_.asInstanceOf[Any]))
+            //accept rule (insert it in keys base)
+            val temp = rulesList.splitAt(rule_order + 1)
+            rulesList = temp._1 ++ MutableList(simulated_rule) ++ temp._2 //update rules base
+            for (key <- temp_new_keys) {
+              unseen_keys.remove(key._1)
+              seen_keys += key._1 //I save the original seen key (not the changed one)
+            }
 
-          updateFile(keys_file_name,unseen_keys.map(_.asInstanceOf[Any]))
+            writeRules(rules_file, rulesList)
+            writeKeys(unseen_keys_file, unseen_keys)
+            writeKeys(seen_keys_file, seen_keys)
 
-          //bw_keys = new BufferedWriter(new FileWriter(keys_base_file))
-          //for(s <- unseen_keys)
-          //  bw_keys.write(s + "\n")
-          //bw_keys.close()
-
-        }else{
-          println("Resetting changes...")
+          } else {
+            println("Resetting changes...")
+          }
         }
+        else
+          println("Proposed rule does not apply to any key.")
+
+      } catch {
+        case e: IndexOutOfBoundsException =>
       }
-      else
-        println("Proposed rule does not apply to any key.")
-
-      print("\nPress R (rule) to insert rule, Q (quit) to quit input procedure: ")
 
     }
 
   }
-
-
-
-  def buildKeysBase(dir: String): LinkedHashSet[String] ={
-    val input_files = getListOfFiles(new File(dir))
-    val output_file_lines = new LinkedHashSet[String]()
-
-    try {
-      for(current_file <-input_files) {
-        val bufferedSource = Source.fromFile(current_file.getAbsolutePath)
-        for (line <- bufferedSource.getLines.toList) {
-          val (key, value): (String, String) = buildPair(line)
-          output_file_lines += (key)
-        }
-        bufferedSource.close
-      }
-    } catch{
-      case e: FileNotFoundException => println("Couldn't find that file.")
-      case e: IOException => println("Got an IOException!")
-    }
-
-    output_file_lines
-  }
-
-  def updateFile(file_name: String, set: LinkedHashSet[Any]): Unit ={
-    val base_file: File = new File(output_directory_path + file_name) //not seen keys
-    val bw = new BufferedWriter(new FileWriter(base_file))
-    //var bw_rules = new BufferedWriter(new FileWriter(rules_base_file))
-    for(s <- set){
-      bw.write(s + "\n")
-    }
-    bw.close()
-  }
-
 
 
 }
+
+
+//https://stackoverflow.com/questions/39453125/inserting-value-into-mutablelist
