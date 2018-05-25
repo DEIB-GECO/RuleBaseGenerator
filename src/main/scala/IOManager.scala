@@ -104,6 +104,17 @@ object IOManager{
     }
   }
 
+  def getRuleFromUser: (String,String) = {
+      try{
+        val ExpectedPatternRule = "(.*)=>(.*)".r
+        val ExpectedPatternRule(a, c) = readLine()
+        (a,c)
+      } catch {
+        case e: Exception => println("Cannot read the input rule!"); throw e
+      }
+  }
+
+
 
 
 

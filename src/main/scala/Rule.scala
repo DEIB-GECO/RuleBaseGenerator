@@ -74,7 +74,7 @@ object Rule {
           Some(key.replaceAll(r.antecedent, r.consequent))
       }
       catch {
-        case e: Exception => println("Rule has wrong syntax! (e.g., it matches " + key + ", but cannot perform action)"); throw e
+        case e: Exception => println("Rule has wrong syntax!"); throw e
       }
     }
     else
