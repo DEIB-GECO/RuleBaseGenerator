@@ -41,7 +41,7 @@ object IOManager{
     bw.close()
   }
 
-  def writeRules(file_name: String, lis: MutableList[Rule]): Unit ={
+  def writeRules(file_name: String, lis: List[Rule]): Unit ={
     val base_file: File = new File(output_directory_path + file_name)
     val bw = new BufferedWriter(new FileWriter(base_file))
     for(s <- lis){
@@ -61,19 +61,17 @@ object IOManager{
       bufferedSource.close
     } catch{
       case e: FileNotFoundException => println("Couldn't find that file.");
-                                        val fil = new File(file_name);
-                                        fil.createNewFile();
       case e: IOException => println("Got an IOException!")
     }
     output_file_lines
   }
 
-  def readRules(file_name: String): MutableList[Rule] ={
-    val rulesList = new MutableList[Rule]()
+  def readRules(file_name: String): List[Rule] ={
+    var rulesList = List[Rule]()
     try {
       val bufferedSource = Source.fromFile(output_directory_path + file_name)
       for (line <- bufferedSource.getLines) {
-        rulesList += Rule.StringToRule(line)
+        rulesList = rulesList ::: List(Rule.StringToRule(line))
       }
       bufferedSource.close
     } catch{
@@ -101,7 +99,7 @@ object IOManager{
     val line = readLine()
     line match {
       case "n" | "N" => print("You chose to reject the specified rule! "); line
-      case "y" | "Y" => println("\nYou accepted the rule! Find the changes in \"" + seen_keys_file + "\" and \"" + rules_file + "\"\n"); line
+      case "y" | "Y" => println("\nYou accepted the rule! Find the changes (if any) in \"" + seen_keys_file + "\" and \"" + rules_file + "\"\n"); line
       case _ => println("Error, your choice is not valid."); getRejectOrAcceptChoice
     }
   }

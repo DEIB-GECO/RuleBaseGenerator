@@ -6,6 +6,7 @@ import Cleaner._
 import IOManager._
 import Rule._
 
+
 import scala.collection.mutable
 import scala.collection.mutable.{ArrayBuffer, LinkedHashSet, MutableList}
 import scala.io.Source
@@ -15,63 +16,82 @@ object KnowledgeBase {
 
 
   var unseen_keys = new LinkedHashSet[String]
-  var rulesList = new MutableList[Rule]
+  var ruleList =  List[Rule]()
+  // var rulesList = RuleBase.ruleList
 
 
-  def createKB(readRulesList: MutableList[Rule], all_keys: LinkedHashSet[String], seen_keys: LinkedHashSet[String]): Unit = {
+  def createKB(readRulesList: List[Rule], all_keys: LinkedHashSet[String], seen_keys: LinkedHashSet[String]): Unit = {
 
-    unseen_keys = all_keys --= seen_keys
+    unseen_keys = all_keys.filter(!seen_keys.contains(_))
+      //new LinkedHashSet[String](all_keys)
     writeKeys(unseen_keys_file, unseen_keys)
 
-    rulesList = readRulesList
+    ruleList = readRulesList
 
     while (getRuleOrQuitChoice.matches("[rR]")) {
 
-      //read user input rule TODO move to method
       val ExpectedPatternRule = "(.*)\\s*(=>)\\s*(.*)".r
       val ExpectedPatternRule(a, b, c) = readLine()
 
       //automatically decide rule order
-      val rule_order: Int = checkRuleInsertionOrder(a, rulesList)
+      //val rule_order: Int = checkRuleInsertionOrder(a, ruleList)
+
 
       //create rule to be simulated
-      val simulated_rule = Rule(a, c, rule_order)
+      val simulated_rule = Rule(a, c, 0)
+
+      //save previous state of ruleList
+      val preRL = ruleList
+
+      //insertion of possible rule
+      ruleList = ruleList :+ simulated_rule //TODO check if insertion was in order
 
       val temp_new_keys = new ArrayBuffer[(String, String)]
 
-      //simulation of application of rule (wrt its order)
-
+      //simulation of application of RB
       try {
-        for (key <- unseen_keys) {
-          val new_key: Option[String] = simulateRule(key, simulated_rule)
-          if (new_key.isDefined)
-            temp_new_keys += ((key, new_key.get))
+        for (key <- all_keys) {
+          breakable{
+            for (rule <- ruleList) {
+              val new_key: Option[String] = simulateRule(key, rule)
+              if (new_key.isDefined) {
+                temp_new_keys += ((key, new_key.get))
+                break
+              }
+            }
+          }
         }
 
         //visualization of rule application simulation
         if (temp_new_keys.nonEmpty) {
-          println("Proposed rule applies to the following " + temp_new_keys.size + " keys: ")
-          for (temp <- temp_new_keys) {
-            println("Key before: " + temp._1 + "\tKey after: " + temp._2)
+          val temp_new_keys_matched: ArrayBuffer[(String,String)] = temp_new_keys.filter(_._1.matches(simulated_rule.antecedent))
+          if (temp_new_keys_matched.nonEmpty) {
+            println("The proposed rule applies to the following " + temp_new_keys_matched.size + " keys: ")
+          } else {
+            println("No key affected by proposed rule")
+          }
+          for (temp <- temp_new_keys_matched) {
+              println("Key before: " + temp._1 + "\tKey after: " + temp._2)
           }
           print("\nPress y (yes) to accept rule, n (no) to reject it: ")
 
           if (getRejectOrAcceptChoice.matches("[yY]")) {
 
             //accept rule (insert it in keys base)
-            val temp = rulesList.splitAt(rule_order + 1)
-            rulesList = temp._1 ++ MutableList(simulated_rule) ++ temp._2 //update rules base
+            //val temp = ruleList.splitAt(rule_order + 1)
+            //ruleList = temp._1 ++ MutableList(simulated_rule) ++ temp._2 //update rules base
             for (key <- temp_new_keys) {
               unseen_keys.remove(key._1)
               seen_keys += key._1 //I save the original seen key (not the changed one)
             }
 
-            writeRules(rules_file, rulesList)
+            writeRules(rules_file, ruleList)
             writeKeys(unseen_keys_file, unseen_keys)
             writeKeys(seen_keys_file, seen_keys)
 
           } else {
-            println("Resetting changes...")
+            println("Resetting possible changes...")
+            ruleList = preRL
           }
         }
         else

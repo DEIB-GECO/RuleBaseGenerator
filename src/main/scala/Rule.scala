@@ -4,7 +4,7 @@ import scala.collection.mutable.{LinkedHashSet, MutableList}
 import scala.io.Source
 import scala.util.matching.Regex
 
-case class Rule(antecedent: String, consequent: String, ordered_id: Int) {
+case class Rule(antecedent: String, consequent: String, ordered_id: Int) extends PartiallyOrdered[String]{
   // val numPattern = "[0-9]+".r
   val pattern = antecedent.r
 
@@ -12,6 +12,13 @@ case class Rule(antecedent: String, consequent: String, ordered_id: Int) {
     (ordered_id + "\t" + antecedent + "=>" + consequent)
   }
 
+
+  override def tryCompareTo[B >: String](that: B)(implicit evidence$1: B => PartiallyOrdered[B]): Option[Int] = {
+    if (this.antecedent == that) Some(0)
+    else if (this.antecedent < that) Some(-1)
+    else if (this.antecedent > that) Some(1)
+    else None
+  }
 
 }
 
@@ -26,9 +33,10 @@ object Rule {
 
   def StringToRule(s: String): Rule = {
     val rule_pattern = "([0-9]+)\\t(.*)=>(.*)"
-    new Rule(s.replaceFirst(rule_pattern, "$2"),
+    val r = new Rule(s.replaceFirst(rule_pattern, "$2"),
       s.replaceFirst(rule_pattern, "$3"),
       Integer.parseInt(s.replaceFirst(rule_pattern, "$1")))
+    r
   }
 
 
@@ -37,7 +45,7 @@ object Rule {
     answer
   }
 
-  def firstMatchedRule(key: String): Option[Rule] = KnowledgeBase.rulesList.find((r: Rule) => trigger(r, key))
+ // def firstMatchedRule(key: String): Option[Rule] = KnowledgeBase.rulesList.find((r: Rule) => trigger(r, key))
 
 
   //def firstMatchedRule(key: String): Option[Rule] = rulesList.find((rule: Rule) => rule.trigger(key))
@@ -85,7 +93,7 @@ object Rule {
       Some(key)
   }
 
-  def applyRules(dir: String): Unit = {
+ /* def applyRules(dir: String): Unit = {
     val input_files = Utils.getListOfFiles(new File(dir))
     val output_file_lines = new LinkedHashSet[String]()
 
@@ -108,7 +116,7 @@ object Rule {
       case e: IOException => println("Got an IOException!")
     }
 
-  }
+  }*/
 
   def checkRuleInsertionOrder(a: String, rulesList: MutableList[Rule]): Int = {
 
