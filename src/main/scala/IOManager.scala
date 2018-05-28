@@ -8,50 +8,49 @@ import scala.io.Source
 import scala.io.StdIn._
 
 
-object IOManager{
+object IOManager {
 
 
-
-  def computeAllKeys(dir: String): LinkedHashSet[String] ={
+  def computeAllKeys(dir: String): LinkedHashSet[String] = {
     val input_files = Utils.getListOfFiles(new File(dir))
     val output_file_lines = new LinkedHashSet[String]()
 
     try {
-      for(current_file <- input_files) {
+      for (current_file <- input_files) {
         val bufferedSource = Source.fromFile(current_file)
         for (line <- bufferedSource.getLines.toList) {
-          output_file_lines += Utils.extractKey(line).replaceAll("__[0-9]*__","__X__")
+          output_file_lines += Utils.extractKey(line).replaceAll("__[0-9]*__", "__X__")
         }
         bufferedSource.close
       }
-    } catch{
-      case e: FileNotFoundException => println("Couldn't find that file.")
+    } catch {
+      case e: FileNotFoundException => println("Couldn't find that file")
       case e: IOException => println("Got an IOException!")
     }
 
     output_file_lines
   }
 
-  def writeKeys(file_name: String, set: LinkedHashSet[String]): Unit ={
+  def writeKeys(file_name: String, set: LinkedHashSet[String]): Unit = {
     val base_file: File = new File(output_directory_path + file_name)
     val bw = new BufferedWriter(new FileWriter(base_file))
-    for(s <- set){
+    for (s <- set) {
       bw.write(s + "\n")
     }
     bw.close()
   }
 
-  def writeRules(file_name: String, lis: List[Rule]): Unit ={
+  def writeRules(file_name: String, lis: List[Rule]): Unit = {
     val base_file: File = new File(output_directory_path + file_name)
     val bw = new BufferedWriter(new FileWriter(base_file))
-    for(s <- lis){
+    for (s <- lis) {
       bw.write(s + "\n")
     }
     bw.close()
   }
 
 
-  def readKeys(file_name: String): LinkedHashSet[String] ={
+  def readKeys(file_name: String): LinkedHashSet[String] = {
     val output_file_lines = new LinkedHashSet[String]()
     try {
       val bufferedSource = Source.fromFile(output_directory_path + file_name)
@@ -59,14 +58,14 @@ object IOManager{
         output_file_lines += line
       }
       bufferedSource.close
-    } catch{
-      case e: FileNotFoundException => println("Couldn't find that file.");
+    } catch {
+      case e: FileNotFoundException => println("Couldn't find file " + file_name)
       case e: IOException => println("Got an IOException!")
     }
     output_file_lines
   }
 
-  def readRules(file_name: String): List[Rule] ={
+  def readRules(file_name: String): List[Rule] = {
     var rulesList = List[Rule]()
     try {
       val bufferedSource = Source.fromFile(output_directory_path + file_name)
@@ -74,7 +73,7 @@ object IOManager{
         rulesList = rulesList ::: List(Rule.StringToRule(line))
       }
       bufferedSource.close
-    } catch{
+    } catch {
       case e: FileNotFoundException => println("Couldn't find file " + file_name)
       case e: IOException => println("Got an IOException!")
     }
@@ -90,7 +89,7 @@ object IOManager{
     line match {
       case "r" | "R" => println("Insert new rule to clean keys (with syntax antecedent=>consequent):"); line
       case "q" | "Q" => println("Cleaner is quitting... Goodbye!"); line
-      case _ => println("Error, your choice is not valid. Please insert new rule to clean keys: "); getRuleOrQuitChoice
+      case _ => println("Error, your choice is not valid. Please choose R or Q: "); getRuleOrQuitChoice
     }
   }
 
@@ -104,18 +103,30 @@ object IOManager{
     }
   }
 
-  def getRuleFromUser: (String,String) = {
-      try{
-        val ExpectedPatternRule = "(.*)=>(.*)".r
-        val ExpectedPatternRule(a, c) = readLine()
-        (a,c)
-      } catch {
-        case e: Exception => println("Cannot read the input rule!"); throw e
-      }
+  def getRuleFromUser: (String, String) = {
+    try {
+      val ExpectedPatternRule = "(.*)=>(.*)".r
+      val ExpectedPatternRule(a, c) = readLine()
+      (a, c)
+    } catch {
+      case e: Exception => println("Input is not a rule!"); throw e
+    }
   }
 
+  def keepNewRuleChoice(oldRule: Rule, newRule:Rule): Boolean = {
 
+    print("\nThe new rule antecedent is identical or equivalent to an existing one.\n" +
+      "Old: " + oldRule +
+      "New: " + newRule +
+      "Do you wish to overwrite the old rule (press y) or keep it (press n)?")
 
+    val line = readLine()
+    line match {
+      case "n" | "N" => println("You chose to keep the old rule!"); false
+      case "y" | "Y" => println("You chose to change the rule!"); true
+      case _ => println("Error, your choice is not valid."); keepNewRuleChoice(oldRule,newRule)
+    }
+  }
 
 
 }

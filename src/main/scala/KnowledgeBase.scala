@@ -1,24 +1,12 @@
-import java.io._
-
 import scala.util.control.Breaks._
 
 import Cleaner._
 import IOManager._
 import Rule._
 
-
-import scala.collection.mutable
-import scala.collection.mutable.{ArrayBuffer, LinkedHashSet, MutableList}
-import scala.io.Source
-import scala.io.StdIn._
+import scala.collection.mutable.{ArrayBuffer, LinkedHashSet}
 
 object KnowledgeBase {
-
-
-  //var unseen_keys = new LinkedHashSet[String]
-  // var ruleList =  List[Rule]()
-  // var rulesList = RuleBase.ruleList
-
 
   def createKB(readRulesList: List[Rule], all_keys: LinkedHashSet[String], seen_keys: LinkedHashSet[String]): Unit = {
 
@@ -26,6 +14,7 @@ object KnowledgeBase {
     writeKeys(unseen_keys_file, unseen_keys)
 
     var ruleList = readRulesList
+    var preRL = List[Rule]()
 
     while (getRuleOrQuitChoice.matches("[rR]")) {
 
@@ -35,10 +24,11 @@ object KnowledgeBase {
         val simulated_rule = Rule(getRuleFromUser, 0)
 
         //save previous state of ruleList
-        val preRL = ruleList
+        preRL = ruleList
 
         //insertion of possible rule
-        ruleList = ruleList :+ simulated_rule //TODO check if insertion was in order
+        //ruleList = ruleList :+ simulated_rule //TODO rimettere per far funzionare
+        ruleList = Rule.addRule(simulated_rule,ruleList)
 
         val temp_new_keys = new ArrayBuffer[(String, String)]
 
@@ -60,8 +50,8 @@ object KnowledgeBase {
           val temp_new_keys_matched: ArrayBuffer[(String, String)] = temp_new_keys.filter(_._1.matches(simulated_rule.antecedent))
           if (temp_new_keys_matched.nonEmpty) {
             println("The proposed rule applies to the following " + temp_new_keys_matched.size + " keys: ")
-          } else {
-            println("No key affected by proposed rule")
+          //} else {
+          //  println("No key affected by proposed rule")
           }
           for (temp <- temp_new_keys_matched) {
             println("Key before: " + temp._1 + "\tKey after: " + temp._2)
@@ -84,14 +74,14 @@ object KnowledgeBase {
             ruleList = preRL
           }
         }
-        else
-          println("Proposed rule does not apply to any key.")
+        else{
+          println("Proposed rule does not apply to any key. It will not be included in the rule list.")
+          ruleList = preRL
+        }
 
       } catch {
-        case e: IndexOutOfBoundsException => ;
-        case e: Exception => println("beccato caso di inserimento sbagliato regola")
-
-
+        case e: IndexOutOfBoundsException => println("INDEXOUTOFBOUND!!!!"); ruleList = preRL
+        case e: Exception => ;//TODO specify exact type of exception
       }
 
     }

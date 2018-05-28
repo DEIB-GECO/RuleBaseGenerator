@@ -25,16 +25,6 @@ object Cleaner{
 
   def main(args: Array[String]): Unit = {
 
-
-  /*  var rulesList2 = readRules(rules_file)
-    val rule2 =  new Rule("a","X",1)
-    rulesList2 += rule2
-    println(rulesList2);
-
-    rulesList2 = rulesList2.filter(_!=rule2)
-    println(rulesList2);*/
-
-
     val all_keys = computeAllKeys(input_directory_path);
     writeKeys(all_keys_file,all_keys)
     val seen_keys = readKeys(seen_keys_file)
