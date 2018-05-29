@@ -96,7 +96,9 @@ object KnowledgeBase {
 
       } catch {
         case e: IndexOutOfBoundsException => ruleList = preRL
-        case e: Exception => println("SCATTATA ECCEZIONE SCONOSCIUTA!"); //TODO specify exact type of exception
+        case e: scala.MatchError =>
+        case e: Exception => println("General exception, check stacktrace. ")
+          e.printStackTrace()
       }
 
     }
