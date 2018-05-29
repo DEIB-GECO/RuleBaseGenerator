@@ -27,7 +27,6 @@ object KnowledgeBase {
         preRL = ruleList
 
         //insertion of possible rule
-        //ruleList = ruleList :+ simulated_rule //TODO rimettere per far funzionare
         ruleList = Rule.addRule(simulated_rule,ruleList)
 
         val temp_new_keys = new ArrayBuffer[(String, String)]
@@ -62,7 +61,7 @@ object KnowledgeBase {
 
             for (key <- temp_new_keys) {
               unseen_keys.remove(key._1)
-              seen_keys += key._1 //I save the original seen key (not the changed one)
+              seen_keys += key._1 //save the original seen key (not the changed one)
             }
 
             writeRules(rules_file, ruleList)

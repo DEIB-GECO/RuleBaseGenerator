@@ -1,9 +1,9 @@
 import IOManager.keepNewRuleChoice
-import dk.brics.automaton.{BasicOperations, RegExp, State}
-import java.util.Set
+import dk.brics.automaton._
 
-import scala.collection.mutable.MutableList
-import scala.util.control.Breaks.{break, breakable}
+import scala.collection.JavaConverters._
+import scala.collection.mutable.Set
+
 
 case class Rule(antecedent: String, consequent: String) extends PartiallyOrdered[Rule] {
   // val numPattern = "[0-9]+".r
@@ -14,39 +14,43 @@ case class Rule(antecedent: String, consequent: String) extends PartiallyOrdered
   }
 
 
- override def tryCompareTo[B >: Rule](that: B)(implicit evidence$1: B => PartiallyOrdered[B]): Option[Int] = {
+  /* override def tryCompareTo[B >: Rule](that: B)(implicit evidence$1: B => PartiallyOrdered[B]): Option[Int] = {
+      if (that.isInstanceOf[Rule]) {
+        val thatIns = that.asInstanceOf[Rule]
+        if (this.antecedent == thatIns.antecedent) Some(0) //expressions are equivalent (or identical)
+        else if (this.antecedent < thatIns.antecedent) Some(-1) //first is contained in second
+        else if (this.antecedent > thatIns.antecedent) Some(1) //first contains second
+        else None //not comparable
+      }
+      else None
+    }*/
+
+  override def tryCompareTo[B >: Rule](that: B)(implicit evidence$1: B => PartiallyOrdered[B]): Option[Int] = {
     if (that.isInstanceOf[Rule]) {
       val thatIns = that.asInstanceOf[Rule]
-      if (this.antecedent == thatIns.antecedent) Some(0) //expressions are equivalent (or identical)
-      else if (this.antecedent < thatIns.antecedent) Some(-1) //first is contained in second
-      else if (this.antecedent > thatIns.antecedent) Some(1) //first contains second
-      else None //not comparable
+
+      val autoThis = (new RegExp(this.antecedent)).toAutomaton()
+      autoThis.expandSingleton()
+      autoThis.determinize()
+
+      val autoThat = (new RegExp(thatIns.antecedent)).toAutomaton()
+      autoThat.expandSingleton()
+      autoThat.determinize()
+
+      if (autoThis.equals(autoThat)) {
+        return Some(0)
+      }
+      val inter = BasicOperations.intersection(autoThis, autoThat)
+      val reachable: Set[State] = inter.getStates.asScala
+      if (reachable.forall(x => x.getAcceptreject != AcceptRejectCondition.RIGHT)) Some(1)
+      else if (reachable.forall(x => x.getAcceptreject != AcceptRejectCondition.LEFT)) Some(-1)
+      else if (reachable.forall(x => x.getAcceptreject != AcceptRejectCondition.BOTH)) None
+      else None
     }
     else None
+
   }
 
-  /*override def tryCompareTo[B >: Rule](that: B)(implicit evidence$1: B => PartiallyOrdered[B]): Option[Int] = {
-    if (that.isInstanceOf[Rule]) {
-      val thatIns = that.asInstanceOf[Rule]
-
-      var autoThis = (new RegExp (this.antecedent)).toAutomaton()
-      var autoThat = (new RegExp (thatIns.antecedent)).toAutomaton()
-      if(!autoThis.isDeterministic){autoThis.determinize()}
-      if(!autoThat.isDeterministic){autoThat.determinize()}
-      val inter = BasicOperations.intersection(autoThis,autoThat)
-      val reachable: Set[State] = inter.getStates
-      for(state <- reachable){
-
-      }
-
-
-      if (this.antecedent == thatIns.antecedent) Some(0) //expressions are equivalent (or identical)
-      else if (this.antecedent < thatIns.antecedent) Some(-1) //first is contained in second
-      else if (this.antecedent > thatIns.antecedent) Some(1) //first contains second
-      else None //not comparable
-    }
-    else None
-  }*/
 }
 
 //companion object
@@ -60,7 +64,7 @@ object Rule {
 
   def StringToRule(s: String): Rule = {
     val rule_pattern = "(.*)=>(.*)"
-    val r = new Rule(s.replaceFirst(rule_pattern, "$1"),s.replaceFirst(rule_pattern, "$2"))
+    val r = new Rule(s.replaceFirst(rule_pattern, "$1"), s.replaceFirst(rule_pattern, "$2"))
     r
   }
 
