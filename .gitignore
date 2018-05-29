@@ -1,0 +1,7 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+.idea/vcs.xml
+project/project/
+project/target/
+target/
+.DS_Store
