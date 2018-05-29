@@ -33,6 +33,7 @@ object KnowledgeBase {
 
         if (!ruleList.equals(preRL)) { //this is false if inserted rule antecedent was equivalent to existing one and user chooses to keep old one
           val temp_new_keys = new ArrayBuffer[(String, String)]
+          val temp_new_new_keys = new ArrayBuffer[(String, String)]
 
           //simulation of application of RB //TODO put in separate method
           for (key <- all_keys) {
@@ -43,18 +44,30 @@ object KnowledgeBase {
                   temp_new_keys += ((key, new_key.get))
                   break
                 }
+               // if(rule is newone) //TODO
+               //   temp_new_new_keys+= ((key, new_key.get)) //+ third element containing rule applied
               }
             }
           }
 
-          //keys impacted by new rule
-          val temp_new_keys_matched: ArrayBuffer[(String, String)] = temp_new_keys.filter(_._1.matches(simulated_rule.antecedent))
+          //keys impacted by new rule //TODO togliere
+          val temp_new_keys_matched: ArrayBuffer[(String, String, String)] = temp_new_keys.filter(_._1.matches(simulated_rule.antecedent))
+            .map{a=>
+              if(unseen_keys.contains(a._1))
+                (a._1,a._2," It was in unseen keys.")
+              else (a._1,a._2," It was in seen keys.")
+            }
+
+          //val temp_new_keys_matched: ArrayBuffer[(String, String, String)] = temp_new_keys.filter(_._1.matches(simulated_rule.antecedent)) //substitute with filter on myrule
+          //val temp_new_keys_matched: ArrayBuffer[(String, String)] = temp_new_keys.filter(_._1.matches(simulated_rule.antecedent)) //substitute with filter on myrule
+
+            //.filter(a=>unseen_keys.contains(a._1))
 
           //visualization of new rule application simulation
           if (temp_new_keys_matched.nonEmpty) {
             println("The proposed rule applies to the following " + temp_new_keys_matched.size + " keys: ")
             for (temp <- temp_new_keys_matched) {
-              println("Key before: " + temp._1 + "\tKey after: " + temp._2)
+              println("Key before: " + temp._1 + "\tKey after: " + temp._2 + temp._3)
             }
             print("\nPress y (yes) to accept rule, n (no) to reject it: ")
 
