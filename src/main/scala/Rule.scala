@@ -42,9 +42,9 @@ case class Rule(antecedent: String, consequent: String) extends PartiallyOrdered
       }
       val inter = BasicOperations.intersection(autoThis, autoThat)
       val reachable: Set[State] = inter.getStates.asScala
-      if (reachable.forall(x => x.getAcceptreject != AcceptRejectCondition.RIGHT)) Some(1)
+      if (reachable.forall(x => x.getAcceptreject != AcceptRejectCondition.BOTH)) None
       else if (reachable.forall(x => x.getAcceptreject != AcceptRejectCondition.LEFT)) Some(-1)
-      else if (reachable.forall(x => x.getAcceptreject != AcceptRejectCondition.BOTH)) None
+      else if (reachable.forall(x => x.getAcceptreject != AcceptRejectCondition.RIGHT)) Some(1)
       else None
     }
     else None
@@ -140,8 +140,9 @@ object Rule {
 
 
     for (rule <- ruleList) {
-      if (rule.tryCompareTo(newRule).isDefined) { //new rule is comparable with current in ruleList
-        if (rule.tryCompareTo(newRule).get == 0) { //new rule is equivalent or identical to already existing rule
+      val rel = rule.tryCompareTo(newRule)
+      if (rel.isDefined) { //new rule is comparable with current in ruleList
+        if (rel.get == 0) { //new rule is equivalent or identical to already existing rule
           if (keepNewRuleChoice(rule, newRule)) {
             return ruleList.updated(ruleList.indexOf(rule), newRule) //replace old with new rule
           }

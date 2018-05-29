@@ -80,9 +80,12 @@ object IOManager {
     rulesList
   }
 
+  def printWelcomeMsg: Unit = {
+    println("\nPlease open the \"" + unseen_keys_file + "\" and \"" + rules_file + "\" files and get inspiration for new cleaning rules!")
+  }
+
   def getRuleOrQuitChoice: String = {
 
-    println("\nPlease open the \"" + unseen_keys_file + "\" and \"" + rules_file + "\" files and get inspiration for new cleaning rules!")
     print("\nPress R (rule) to insert rule, Q (quit) to quit input procedure: ")
 
     val line = readLine()
@@ -113,18 +116,18 @@ object IOManager {
     }
   }
 
-  def keepNewRuleChoice(oldRule: Rule, newRule:Rule): Boolean = {
+  def keepNewRuleChoice(oldRule: Rule, newRule: Rule): Boolean = {
 
-    print("\nThe new rule antecedent is identical or equivalent to an existing one.\n" +
-      "Old: " + oldRule +
-      "New: " + newRule +
-      "Do you wish to overwrite the old rule (press y) or keep it (press n)?")
+    print("\nThe new rule antecedent is identical or equivalent to an existing one." +
+      "\nOld: " + oldRule +
+      "\nNew: " + newRule +
+      "\nTo choose new rule press Y, to keep the old rule press N: ")
 
     val line = readLine()
     line match {
-      case "n" | "N" => println("You chose to keep the old rule!"); false
-      case "y" | "Y" => println("You chose to change the rule!"); true
-      case _ => println("Error, your choice is not valid."); keepNewRuleChoice(oldRule,newRule)
+      case "n" | "N" => println("You chose to keep the old rule!\n"); false
+      case "y" | "Y" => println("You chose to change the rule!\n"); true
+      case _ => println("Error, your choice is not valid.\n"); keepNewRuleChoice(oldRule, newRule)
     }
   }
 
