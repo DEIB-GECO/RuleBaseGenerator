@@ -20,9 +20,9 @@ object KnowledgeBase {
 
     while (getRuleOrQuitChoice.matches("[rR]")) {
 
-      //create rule to be simulated
       try {
 
+        //create rule to be simulated
         val simulated_rule = Rule(getRuleFromUser, 0)
 
         //save previous state of ruleList
@@ -32,56 +32,47 @@ object KnowledgeBase {
         ruleList = Rule.addRule(simulated_rule, ruleList)
 
         if (!ruleList.equals(preRL)) { //this is false if inserted rule antecedent was equivalent to existing one and user chooses to keep old one
-          val temp_new_keys = new ArrayBuffer[(String, String)]
-          val temp_new_new_keys = new ArrayBuffer[(String, String)]
+
+          //simulation of RB with new rule
+          val temp: (ArrayBuffer[(String, String, Rule)], ArrayBuffer[(String, String, Rule)]) = simulateRB(ruleList: List[Rule], simulated_rule: Rule, all_keys: LinkedHashSet[String])
+          val temp_keys_rb = temp._1
+          val temp_keys_new_rule = temp._2
+
+          /*val temp_keys_rb = new ArrayBuffer[(String, String, Rule)]
+          val temp_keys_new_rule = new ArrayBuffer[(String, String, Rule)]
 
           //simulation of application of RB //TODO put in separate method
           for (key <- all_keys) {
             breakable {
               for (rule <- ruleList) {
-                val new_key: Option[String] = simulateRule(key, rule)
-                if (new_key.isDefined) {
-                  temp_new_keys += ((key, new_key.get))
+                val temp_key: Option[String] = simulateRule(key, rule)
+                if (temp_key.isDefined) {
+                  temp_keys_rb += ((key, temp_key.get, rule))
+                  if (rule == simulated_rule)
+                    temp_keys_new_rule += ((key, temp_key.get, rule))
                   break
                 }
-               // if(rule is newone) //TODO
-               //   temp_new_new_keys+= ((key, new_key.get)) //+ third element containing rule applied
+
               }
             }
-          }
-
-          //keys impacted by new rule //TODO togliere
-          val temp_new_keys_matched: ArrayBuffer[(String, String, String)] = temp_new_keys.filter(_._1.matches(simulated_rule.antecedent))
-            .map{a=>
-              if(unseen_keys.contains(a._1))
-                (a._1,a._2," It was in unseen keys.")
-              else (a._1,a._2," It was in seen keys.")
-            }
-
-          //val temp_new_keys_matched: ArrayBuffer[(String, String, String)] = temp_new_keys.filter(_._1.matches(simulated_rule.antecedent)) //substitute with filter on myrule
-          //val temp_new_keys_matched: ArrayBuffer[(String, String)] = temp_new_keys.filter(_._1.matches(simulated_rule.antecedent)) //substitute with filter on myrule
-
-            //.filter(a=>unseen_keys.contains(a._1))
+          }*/
 
           //visualization of new rule application simulation
-          if (temp_new_keys_matched.nonEmpty) {
-            println("The proposed rule applies to the following " + temp_new_keys_matched.size + " keys: ")
-            for (temp <- temp_new_keys_matched) {
-              println("Key before: " + temp._1 + "\tKey after: " + temp._2 + temp._3)
+          if (temp_keys_new_rule.nonEmpty) {
+            println("The proposed rule applies to the following " + temp_keys_new_rule.size + " keys: ")
+            for (temp <- temp_keys_new_rule) {
+              println("Key before: " + temp._1 + "\tKey after: " + temp._2 + "\tApplied rule: " + temp._3)
             }
             print("\nPress y (yes) to accept rule, n (no) to reject it: ")
 
             if (getRejectOrAcceptChoice.matches("[yY]")) {
 
-              for (key <- temp_new_keys) {
+              for (key <- temp_keys_rb) {
                 unseen_keys.remove(key._1)
-                seen_keys += key._1 //save the original seen key (not the changed one)
+                seen_keys += key._1
               }
 
-              //TODO put in separate method
-              writeRules(rules_file, ruleList)
-              writeKeys(unseen_keys_file, unseen_keys)
-              writeKeys(seen_keys_file, seen_keys)
+              updateFiles(ruleList, unseen_keys, seen_keys)
 
             } else {
               println("Resetting possible changes...")
@@ -105,7 +96,32 @@ object KnowledgeBase {
 
   }
 
+
+  def simulateRB(ruleList: List[Rule], simulated_rule: Rule, all_keys: LinkedHashSet[String]): (ArrayBuffer[(String, String, Rule)], ArrayBuffer[(String, String, Rule)]) = {
+
+    val temp_keys_rb = new ArrayBuffer[(String, String, Rule)]
+    val temp_keys_new_rule = new ArrayBuffer[(String, String, Rule)]
+
+    for (key <- all_keys) {
+      breakable {
+        for (rule <- ruleList) {
+          val temp_key: Option[String] = simulateRule(key, rule)
+          if (temp_key.isDefined) {
+            temp_keys_rb += ((key, temp_key.get, rule))
+            if (rule == simulated_rule)
+              temp_keys_new_rule += ((key, temp_key.get, rule))
+            break
+          }
+
+        }
+      }
+    }
+    (temp_keys_rb, temp_keys_new_rule)
+  }
+
+
 }
+
 
 
 //https://stackoverflow.com/questions/39453125/inserting-value-into-mutablelist

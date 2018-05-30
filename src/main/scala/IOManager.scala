@@ -92,7 +92,7 @@ object IOManager {
     line match {
       case "r" | "R" => println("Insert new rule to clean keys (with syntax antecedent=>consequent):"); line
       case "q" | "Q" => println("Cleaner is quitting... Goodbye!"); line
-      case _ => println("Error, your choice is not valid. Please choose R or Q: "); getRuleOrQuitChoice
+      case _ => println("Error, your choice is not valid."); getRuleOrQuitChoice
     }
   }
 
@@ -119,16 +119,22 @@ object IOManager {
   def keepNewRuleChoice(oldRule: Rule, newRule: Rule): Boolean = {
 
     print("\nThe new rule antecedent is identical or equivalent to an existing one." +
-      "\nOld: " + oldRule +
-      "\nNew: " + newRule +
-      "\nTo choose new rule press Y, to keep the old rule press N: ")
+      "\nOld (O): " + oldRule +
+      "\nNew (N): " + newRule +
+      "\nTo choose new rule press N, to keep the old rule press O: ")
 
     val line = readLine()
     line match {
-      case "n" | "N" => println("You chose to keep the old rule!\n"); false
-      case "y" | "Y" => println("You chose to change the rule!\n"); true
+      case "n" | "N" => println("You chose to change the rule!\n"); true
+      case "y" | "Y" => println("You chose to keep the old rule!\n"); false
       case _ => println("Error, your choice is not valid.\n"); keepNewRuleChoice(oldRule, newRule)
     }
+  }
+
+  def updateFiles(ruleList: List[Rule], unseen_keys: LinkedHashSet[String], seen_keys: LinkedHashSet[String]): Unit = {
+    writeRules(rules_file, ruleList)
+    writeKeys(unseen_keys_file, unseen_keys)
+    writeKeys(seen_keys_file, seen_keys)
   }
 
 

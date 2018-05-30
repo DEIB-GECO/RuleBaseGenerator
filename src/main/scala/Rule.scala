@@ -13,18 +13,6 @@ case class Rule(antecedent: String, consequent: String) extends PartiallyOrdered
     (antecedent + "=>" + consequent)
   }
 
-
-  /* override def tryCompareTo[B >: Rule](that: B)(implicit evidence$1: B => PartiallyOrdered[B]): Option[Int] = {
-      if (that.isInstanceOf[Rule]) {
-        val thatIns = that.asInstanceOf[Rule]
-        if (this.antecedent == thatIns.antecedent) Some(0) //expressions are equivalent (or identical)
-        else if (this.antecedent < thatIns.antecedent) Some(-1) //first is contained in second
-        else if (this.antecedent > thatIns.antecedent) Some(1) //first contains second
-        else None //not comparable
-      }
-      else None
-    }*/
-
   /* override def tryCompareTo[B >: Rule](that: B)(implicit evidence$1: B => PartiallyOrdered[B]): Option[Int] = {
      if (that.isInstanceOf[Rule]) {
        val thatIns = that.asInstanceOf[Rule]
@@ -108,7 +96,7 @@ case class Rule(antecedent: String, consequent: String) extends PartiallyOrdered
 
       if (key.matches(r.antecedent)) {
         try {
-          if (r.consequent.equals("DELETE"))
+          if (r.consequent.equals("NULL"))
             Some(key.replaceAll(r.antecedent, "NULL"))
           else
             Some(key.replaceAll(r.antecedent, r.consequent))
@@ -166,7 +154,7 @@ case class Rule(antecedent: String, consequent: String) extends PartiallyOrdered
         val rel = rule.tryCompareTo(newRule)
         if (rel.isDefined) { //new rule is comparable with current in ruleList
           if (rel.get == 0) { //new rule is equivalent or identical to already existing rule
-            if (keepNewRuleChoice(rule, newRule)) {
+            if (newRule!=rule && keepNewRuleChoice(rule, newRule) ) {
               return ruleList.updated(ruleList.indexOf(rule), newRule) //replace old with new rule
             }
             else
