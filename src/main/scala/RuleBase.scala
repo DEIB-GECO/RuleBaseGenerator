@@ -1,16 +1,24 @@
-import scala.util.control.Breaks._
+import java.io._
 
+import scala.util.control.Breaks._
 import Cleaner._
 import IOManager._
 import Rule._
 
-import scala.collection.mutable.{ArrayBuffer, LinkedHashSet}
+import scala.collection.mutable.{ArrayBuffer, LinkedHashSet, ListBuffer}
+import scala.io.Source
 
-object KnowledgeBase {
+object RuleBase {
 
-  def createKB(readRulesList: List[Rule], all_keys: LinkedHashSet[String], seen_keys: LinkedHashSet[String]): Unit = {
+  def createRB(readRulesList: List[Rule], all_keys: LinkedHashSet[String], seen_keys: LinkedHashSet[(String, String, Rule)]): Unit = {
 
-    val unseen_keys: LinkedHashSet[String] = all_keys.filter(!seen_keys.contains(_))
+    val seen_ant = new LinkedHashSet[String]
+    for (x <- seen_keys) {
+      seen_ant.add(x._1)
+    }
+
+    // val unseen_keys: LinkedHashSet[String] = all_keys.filter(!seen_keys.contains(_))
+    val unseen_keys: LinkedHashSet[String] = all_keys.filter(!seen_ant.contains(_))
     writeKeys(unseen_keys_file, unseen_keys)
 
     var ruleList = readRulesList
@@ -60,16 +68,17 @@ object KnowledgeBase {
           //visualization of new rule application simulation
           if (temp_keys_new_rule.nonEmpty) {
             println("The proposed rule applies to the following " + temp_keys_new_rule.size + " keys: ")
-            for (temp <- temp_keys_new_rule) {
-              println("Key before: " + temp._1 + "\tKey after: " + temp._2 + "\tApplied rule: " + temp._3)
+            println("%70s\t%70s\t%50s\n".format("Key before","Key after","Applied rule"))
+            for (t <- temp_keys_new_rule) {
+              println("%70s\t%70s\t%50s\n".format(t._1,t._2,t._3))
             }
             print("\nPress y (yes) to accept rule, n (no) to reject it: ")
 
             if (getRejectOrAcceptChoice.matches("[yY]")) {
 
-              for (key <- temp_keys_rb) {
-                unseen_keys.remove(key._1)
-                seen_keys += key._1
+              for (key_story <- temp_keys_rb) {
+                unseen_keys.remove(key_story._1)
+                seen_keys += key_story
               }
 
               updateFiles(ruleList, unseen_keys, seen_keys)
@@ -96,7 +105,6 @@ object KnowledgeBase {
 
   }
 
-
   def simulateRB(ruleList: List[Rule], simulated_rule: Rule, all_keys: LinkedHashSet[String]): (ArrayBuffer[(String, String, Rule)], ArrayBuffer[(String, String, Rule)]) = {
 
     val temp_keys_rb = new ArrayBuffer[(String, String, Rule)]
@@ -119,9 +127,49 @@ object KnowledgeBase {
     (temp_keys_rb, temp_keys_new_rule)
   }
 
+  def applyRB(readRulesList: List[Rule], dirIn: String, dirOut: String): Unit = {
+
+    val input_files = Utils.getListOfFiles(new File(dirIn))
+
+    try {
+      //for every file
+      for (current_file <- input_files) {
+        var output_file_lines = ListBuffer[String]()
+        val bufferedSource = Source.fromFile(current_file.getAbsolutePath)
+        //for all the lines of the file
+        for (line <- bufferedSource.getLines.toList) {
+          //extract pair
+          var (key, value): (String, String) = Utils.extractPair(line)
+          //apply first available rule to key
+          for (rule <- readRulesList) {
+            val temp_key: Option[String] = simulateRule(key, rule)
+            if (temp_key.isDefined) {
+              key = temp_key.get
+            }
+          }
+          //write new pair on new set
+          output_file_lines += s"$key\t$value"
+        }
+        bufferedSource.close
+
+        val out_file: File = new File(output_directory_path + "cleaned_" + current_file.getName)
+        val bw = new BufferedWriter(new FileWriter(out_file))
+        for (s <- output_file_lines) {
+          bw.write(s + "\n")
+        }
+        bw.close()
+
+      }
+    } catch {
+      case e: FileNotFoundException => println("Couldn't find that file.")
+      case e: IOException => println("Got an IOException!")
+        e.printStackTrace()
+    }
+
+  }
+
 
 }
-
 
 
 //https://stackoverflow.com/questions/39453125/inserting-value-into-mutablelist

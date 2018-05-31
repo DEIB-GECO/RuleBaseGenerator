@@ -1,15 +1,13 @@
 import java.io._
-import java.nio.file.{Files, Paths}
 
 import Cleaner._
 
-import scala.collection.mutable.{LinkedHashSet, MutableList}
+import scala.collection.mutable.{LinkedHashSet}
 import scala.io.Source
 import scala.io.StdIn._
 
 
 object IOManager {
-
 
   def computeAllKeys(dir: String): LinkedHashSet[String] = {
     val input_files = Utils.getListOfFiles(new File(dir))
@@ -40,6 +38,17 @@ object IOManager {
     bw.close()
   }
 
+  def writeSeenKeys(file_name: String, set: LinkedHashSet[(String,String,Rule)]): Unit = {
+    val base_file: File = new File(output_directory_path + file_name)
+    val bw = new BufferedWriter(new FileWriter(base_file))
+    bw.write("%70s\t%70s\t%50s\n".format("Key before","Key after","Applied rule"))
+    for (s <- set) {
+      //bw.write("Key before: " + s._1 + "\tKey after: " + s._2 + "\tApplied rule: " + s._3 + "\n")
+      bw.write("%70s\t%70s\t%50s\n".format(s._1,s._2,s._3))
+    }
+    bw.close()
+  }
+
   def writeRules(file_name: String, lis: List[Rule]): Unit = {
     val base_file: File = new File(output_directory_path + file_name)
     val bw = new BufferedWriter(new FileWriter(base_file))
@@ -49,13 +58,15 @@ object IOManager {
     bw.close()
   }
 
-
-  def readKeys(file_name: String): LinkedHashSet[String] = {
-    val output_file_lines = new LinkedHashSet[String]()
+  def readSeenKeys(file_name: String): LinkedHashSet[(String,String,Rule)] = {
+    val output_file_lines = new LinkedHashSet[(String,String,Rule)]()
     try {
       val bufferedSource = Source.fromFile(output_directory_path + file_name)
+      val rule_pattern = "(.*)\\t(.*)\\t(.*)=>(.*)"
+
       for (line <- bufferedSource.getLines) {
-        output_file_lines += line
+        val line_ns = line.replaceAll("\\t\\s*","\\t")
+        output_file_lines += ((line_ns.replaceFirst(rule_pattern, "$1"), line_ns.replaceFirst(rule_pattern, "$2"), new Rule(line_ns.replaceFirst(rule_pattern, "$3"), line_ns.replaceFirst(rule_pattern, "$4"))))
       }
       bufferedSource.close
     } catch {
@@ -96,7 +107,6 @@ object IOManager {
     }
   }
 
-
   def getRejectOrAcceptChoice: String = {
     val line = readLine()
     line match {
@@ -126,17 +136,16 @@ object IOManager {
     val line = readLine()
     line match {
       case "n" | "N" => println("You chose to change the rule!\n"); true
-      case "y" | "Y" => println("You chose to keep the old rule!\n"); false
+      case "o" | "O" => println("You chose to keep the old rule!\n"); false
       case _ => println("Error, your choice is not valid.\n"); keepNewRuleChoice(oldRule, newRule)
     }
   }
 
-  def updateFiles(ruleList: List[Rule], unseen_keys: LinkedHashSet[String], seen_keys: LinkedHashSet[String]): Unit = {
+  def updateFiles(ruleList: List[Rule], unseen_keys: LinkedHashSet[String], seen_keys: LinkedHashSet[(String,String,Rule)]): Unit = {
     writeRules(rules_file, ruleList)
     writeKeys(unseen_keys_file, unseen_keys)
-    writeKeys(seen_keys_file, seen_keys)
+    writeSeenKeys(seen_keys_file, seen_keys)
   }
-
 
 }
 
