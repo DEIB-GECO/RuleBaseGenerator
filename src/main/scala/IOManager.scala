@@ -2,7 +2,7 @@ import java.io._
 
 import Cleaner._
 
-import scala.collection.mutable.{LinkedHashSet}
+import scala.collection.mutable.LinkedHashSet
 import scala.io.Source
 import scala.io.StdIn._
 
@@ -91,7 +91,7 @@ object IOManager {
     rulesList
   }
 
-  def printWelcomeMsg: Unit = {
+  def printWelcomeMsg(): Unit = {
     println("\nPlease open the \"" + unseen_keys_file + "\" and \"" + rules_file + "\" files and get inspiration for new cleaning rules!")
   }
 

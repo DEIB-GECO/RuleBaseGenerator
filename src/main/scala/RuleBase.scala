@@ -17,7 +17,6 @@ object RuleBase {
       seen_ant.add(x._1)
     }
 
-    // val unseen_keys: LinkedHashSet[String] = all_keys.filter(!seen_keys.contains(_))
     val unseen_keys: LinkedHashSet[String] = all_keys.filter(!seen_ant.contains(_))
     writeKeys(unseen_keys_file, unseen_keys)
 
@@ -49,7 +48,7 @@ object RuleBase {
           /*val temp_keys_rb = new ArrayBuffer[(String, String, Rule)]
           val temp_keys_new_rule = new ArrayBuffer[(String, String, Rule)]
 
-          //simulation of application of RB //TODO put in separate method
+          //simulation of application of RB
           for (key <- all_keys) {
             breakable {
               for (rule <- ruleList) {

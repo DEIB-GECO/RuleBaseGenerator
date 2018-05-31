@@ -1,16 +1,12 @@
 import IOManager.keepNewRuleChoice
 import dk.brics.automaton._
 
-import scala.collection.JavaConverters._
-import scala.collection.mutable.Set
-
 
 case class Rule(antecedent: String, consequent: String) extends PartiallyOrdered[Rule] {
-  // val numPattern = "[0-9]+".r
-  val pattern = antecedent.r
+  //val pattern = antecedent.r
 
   override def toString: String = {
-    (antecedent + "=>" + consequent)
+    antecedent + "=>" + consequent
   }
 
   /* override def tryCompareTo[B >: Rule](that: B)(implicit evidence$1: B => PartiallyOrdered[B]): Option[Int] = {
@@ -42,11 +38,11 @@ case class Rule(antecedent: String, consequent: String) extends PartiallyOrdered
     if (that.isInstanceOf[Rule]) {
       val thatIns = that.asInstanceOf[Rule]
 
-      val autoThis = (new RegExp(this.antecedent)).toAutomaton()
+      val autoThis = new RegExp(this.antecedent).toAutomaton()
       autoThis.expandSingleton()
       autoThis.determinize()
 
-      val autoThat = (new RegExp(thatIns.antecedent)).toAutomaton()
+      val autoThat = new RegExp(thatIns.antecedent).toAutomaton()
       autoThat.expandSingleton()
       autoThat.determinize()
 
