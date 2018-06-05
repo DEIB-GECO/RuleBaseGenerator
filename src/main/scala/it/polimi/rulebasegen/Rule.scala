@@ -1,5 +1,7 @@
-import IOManager.keepNewRuleChoice
+package it.polimi.rulebasegen
+
 import dk.brics.automaton._
+import it.polimi.rulebasegen.IOManager.keepNewRuleChoice
 
 
 case class Rule(antecedent: String, consequent: String) extends PartiallyOrdered[Rule] {
@@ -9,9 +11,9 @@ case class Rule(antecedent: String, consequent: String) extends PartiallyOrdered
     antecedent + "=>" + consequent
   }
 
-  /* override def tryCompareTo[B >: Rule](that: B)(implicit evidence$1: B => PartiallyOrdered[B]): Option[Int] = {
-     if (that.isInstanceOf[Rule]) {
-       val thatIns = that.asInstanceOf[Rule]
+  /* override def tryCompareTo[B >: it.polimi.rulebasegen.Rule](that: B)(implicit evidence$1: B => PartiallyOrdered[B]): Option[Int] = {
+     if (that.isInstanceOf[it.polimi.rulebasegen.Rule]) {
+       val thatIns = that.asInstanceOf[it.polimi.rulebasegen.Rule]
 
        val autoThis = (new RegExp(this.antecedent)).toAutomaton()
        autoThis.expandSingleton()
@@ -72,11 +74,11 @@ object Rule {
     r
   }
 
-  // def firstMatchedRule(key: String): Option[Rule] = KnowledgeBase.rulesList.find((r: Rule) => trigger(r, key))
+  // def firstMatchedRule(key: String): Option[it.polimi.rulebasegen.Rule] = KnowledgeBase.rulesList.find((r: it.polimi.rulebasegen.Rule) => trigger(r, key))
 
 
-  //def firstMatchedRule(key: String): Option[Rule] = rulesList.find((rule: Rule) => rule.trigger(key))
-  //filter((rule: Rule) => rule.trigger(key)).headOption
+  //def firstMatchedRule(key: String): Option[it.polimi.rulebasegen.Rule] = rulesList.find((rule: it.polimi.rulebasegen.Rule) => rule.trigger(key))
+  //filter((rule: it.polimi.rulebasegen.Rule) => rule.trigger(key)).headOption
 
   def simulateRule(key: String, r: Rule): Option[String] = {
 
@@ -88,7 +90,7 @@ object Rule {
           Some(key.replaceAll(r.antecedent, r.consequent))
       }
       catch {
-        case e: Exception => println("Rule has wrong syntax!"); throw e
+        case e: Exception => println("it.polimi.rulebasegen.Rule has wrong syntax!"); throw e
       }
     }
     else
