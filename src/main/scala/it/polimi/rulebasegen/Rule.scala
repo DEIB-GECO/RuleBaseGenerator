@@ -11,31 +11,6 @@ case class Rule(antecedent: String, consequent: String) extends PartiallyOrdered
     antecedent + "=>" + consequent
   }
 
-  /* override def tryCompareTo[B >: it.polimi.rulebasegen.Rule](that: B)(implicit evidence$1: B => PartiallyOrdered[B]): Option[Int] = {
-     if (that.isInstanceOf[it.polimi.rulebasegen.Rule]) {
-       val thatIns = that.asInstanceOf[it.polimi.rulebasegen.Rule]
-
-       val autoThis = (new RegExp(this.antecedent)).toAutomaton()
-       autoThis.expandSingleton()
-       autoThis.determinize()
-
-       val autoThat = (new RegExp(thatIns.antecedent)).toAutomaton()
-       autoThat.expandSingleton()
-       autoThat.determinize()
-
-       if (autoThis.equals(autoThat)) {
-         return Some(0)
-       }
-       val inter = BasicOperations.intersection(autoThis, autoThat)
-       val reachable: Set[State] = inter.getStates.asScala
-       if (reachable.forall(x => x.getAcceptreject != AcceptRejectCondition.BOTH)) None
-       else if (reachable.forall(x => x.getAcceptreject != AcceptRejectCondition.LEFT)) Some(-1)
-       else if (reachable.forall(x => x.getAcceptreject != AcceptRejectCondition.RIGHT)) Some(1)
-       else None
-     }
-     else None
-   }*/
-
   override def tryCompareTo[B >: Rule](that: B)(implicit evidence$1: B => PartiallyOrdered[B]): Option[Int] = {
     if (that.isInstanceOf[Rule]) {
       val thatIns = that.asInstanceOf[Rule]
@@ -73,12 +48,6 @@ object Rule {
     val r = new Rule(s.replaceFirst(rule_pattern, "$1"), s.replaceFirst(rule_pattern, "$2"))
     r
   }
-
-  // def firstMatchedRule(key: String): Option[it.polimi.rulebasegen.Rule] = KnowledgeBase.rulesList.find((r: it.polimi.rulebasegen.Rule) => trigger(r, key))
-
-
-  //def firstMatchedRule(key: String): Option[it.polimi.rulebasegen.Rule] = rulesList.find((rule: it.polimi.rulebasegen.Rule) => rule.trigger(key))
-  //filter((rule: it.polimi.rulebasegen.Rule) => rule.trigger(key)).headOption
 
   def simulateRule(key: String, r: Rule): Option[String] = {
 
